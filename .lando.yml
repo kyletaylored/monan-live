@@ -1,0 +1,11 @@
+name: monan-live
+recipe: pantheon
+config:
+  framework: drupal8
+  site: monan-live
+  id: 5105ab5b-596b-49b5-ba71-d59b858e8f40
+  webroot: web
+  xdebug: true
+  index: false
+  edge: false
+  cache: false
