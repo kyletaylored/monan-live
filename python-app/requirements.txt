@@ -1,0 +1,17 @@
+astroid==2.6.2
+certifi==2021.10.8
+charset-normalizer==2.0.9
+colorzero==2.0
+gpiozero==1.6.2
+idna==3.3
+isort==5.9.1
+lazy-object-proxy==1.6.0
+mccabe==0.6.1
+protobuf==3.17.3
+pylint==2.9.3
+python-dotenv==0.19.2
+requests==2.26.0
+six==1.16.0
+toml==0.10.2
+urllib3==1.26.7
+wrapt==1.12.1
