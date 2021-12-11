@@ -1,5 +1,5 @@
-# from gpiozero import MotionSensor
-# from gpiozero import PiCamera
+from gpiozero import MotionSensor
+from gpiozero import PiCamera
 import base64
 import datetime
 import json
@@ -34,12 +34,13 @@ auth_data = {
 }
 auth_string = auth_data['name'] + ":" + auth_data['pass']
 
+
 # Create object for PIR sensor
 # PIR sensor is connected to GPIO-4 (pin 7)
-# pir = MotionSensor(4)
+pir = MotionSensor(4)
 
 # Create Object for PiCamera
-# camera = PiCamera()
+camera = PiCamera()
 
 
 # Create filename from date and time.
@@ -134,12 +135,7 @@ def send_to_monan_live(f_name):
 
     # Create new node
     article_response = requests.post(url + '/jsonapi/node/article', data=data, headers=headers)
-    pp.pprint(article_response.json())
 
-
-# Test
-send_to_monan_live('/Users/kyletaylor/Downloads/monan-small.png')
-sys.exit()
 
 # Run main
 while True:
@@ -151,7 +147,7 @@ while True:
     print("Mike alert!")
 
     # Wait 2 seconds
-    time.sleep(2)
+    time.sleep(1.5)
 
     # Preview camera on screen until picture is taken
     # Only used if using desktop OS.
