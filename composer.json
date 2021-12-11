@@ -19,6 +19,7 @@
     "drupal/admin_toolbar": "^3.0",
     "drupal/core-composer-scaffold": "^9.2",
     "drupal/core-recommended": "^9.2",
+    "drupal/pantheon_advanced_page_cache": "^1.2",
     "drupal/restui": "^1.20",
     "drush/drush": "^10",
     "pantheon-systems/drupal-integrations": "^9",
