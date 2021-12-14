@@ -1,5 +1,5 @@
 from gpiozero import MotionSensor
-from gpiozero import PiCamera
+from picamera import PiCamera
 import base64
 import datetime
 import json
@@ -7,12 +7,11 @@ import os
 import pathlib
 import pprint
 import random
-import sys
-
+import time
 import requests
+
 # Load environmental variables
 from dotenv import load_dotenv
-
 load_dotenv()
 
 # Set up printer and text generator
@@ -34,13 +33,13 @@ auth_data = {
 }
 auth_string = auth_data['name'] + ":" + auth_data['pass']
 
-
 # Create object for PIR sensor
 # PIR sensor is connected to GPIO-4 (pin 7)
 pir = MotionSensor(4)
 
 # Create Object for PiCamera
 camera = PiCamera()
+camera.rotation = 180
 
 
 # Create filename from date and time.
@@ -77,7 +76,7 @@ def monan_auth():
     return drupal_auth['csrf_token']
 
 
-def monan_file(f_name):
+def monan_file(f_name, article_id):
     # Get base64 image
     # image_data = get_base64_encoded_image(filename)
     # image_extension = pathlib.Path(filename).suffix
@@ -88,6 +87,11 @@ def monan_file(f_name):
     binary_data = file.read()
     file.close()
 
+    # POST /jsonapi/node/article/{uuid}/field_image HTTP/1.1
+    # Content-Type: application/octet-stream
+    # Accept: application/vnd.api+json
+    # Content-Disposition: file; filename="filename.jpg"
+
     # Headers
     headers = {
         "Content-Type": "application/octet-stream",
@@ -96,15 +100,12 @@ def monan_file(f_name):
         "X-CSRF-Token": monan_auth(),
         "Authorization": "Basic " + base64.b64encode(auth_string.encode('utf-8')).decode('utf-8'),
     }
-    image_response = requests.post(url + '/jsonapi/node/article/field_image', data=binary_data, headers=headers)
+    image_response = requests.post(url + '/jsonapi/node/article/' + article_id + '/field_image', data=binary_data,
+                                   headers=headers)
     return image_response
 
 
 def send_to_monan_live(f_name):
-    # Upload image.
-    image_response = monan_file(f_name)
-    pp.pprint(image_response.json())
-
     # Prepare article data.
     headers = {
         "Content-Type": "application/vnd.api+json",
@@ -121,49 +122,57 @@ def send_to_monan_live(f_name):
                     "value": phrase['meaning'],
                     "format": "plain_text"
                 }
-            },
-            "relationships": {
-                "field_image": {
-                    "data": {
-                        "type": "file--file",
-                        "id": image_response.json()['data']['id'],
-                    }
-                }
             }
         }
     })
 
     # Create new node
     article_response = requests.post(url + '/jsonapi/node/article', data=data, headers=headers)
+    article_id = article_response.json()['data']['id']
+    pp.pprint(article_response.json())
+
+    # Upload image.
+    image_response = monan_file(f_name, article_id)
+    pp.pprint(image_response.json())
 
 
 # Run main
-while True:
-    # Get filename, set to tmp
-    filename = get_file_name()
+def main():
+    print("Starting Mike detection...")
+    while True:
+        # Get filename, set to tmp
+        filename = get_file_name()
 
-    # Wait for motion to be detected
-    pir.wait_for_motion()
-    print("Mike alert!")
+        # Wait for motion to be detected
+        pir.wait_for_motion()
+        print("Mike alert!")
 
-    # Wait 2 seconds
-    time.sleep(1.5)
+        # Wait 2 seconds
+        time.sleep(2)
 
-    # Preview camera on screen until picture is taken
-    # Only used if using desktop OS.
-    # camera.start_preview()
+        # Preview camera on screen until picture is taken
+        # Only used if using desktop OS.
+        # camera.start_preview()
 
-    # Take picture, save to temp
-    print("Taking photo: " + filename)
-    path_to_file = '/tmp/' + filename
-    camera.capture(path_to_file)
-    # camera.stop_preview()
+        # Take picture, save to temp
+        print("Taking photo: " + filename)
+        camera.capture(filename)
+        # camera.stop_preview()
 
-    # Send to monan.live
-    send_to_monan_live(path_to_file)
+        # Send to monan.live
+        send_to_monan_live(filename)
 
-    # Clean files up
-    os.remove(path_to_file)
+        # Clean files up
+        os.remove(filename)
 
-    # Wait 10 seconds before checking the motion sensor again.
-    time.sleep(10)
+        # Wait 10 seconds before checking the motion sensor again.
+        time.sleep(30)
+
+
+# Run infinitely
+while error:
+    try:
+        main()
+        error = False
+    except IOError:
+        error = True
