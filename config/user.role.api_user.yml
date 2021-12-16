@@ -1,0 +1,13 @@
+uuid: e73804c4-deac-41be-80ab-b2221eff077e
+langcode: en
+status: true
+dependencies: {  }
+id: api_user
+label: 'API User'
+weight: 3
+is_admin: null
+permissions:
+  - 'create article content'
+  - 'create terms in tags'
+  - 'use text format full_html'
+  - 'use text format restricted_html'

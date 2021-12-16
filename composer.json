@@ -1,0 +1,100 @@
+{
+  "name": "pantheon-upstreams/drupal-project",
+  "description": "Install Drupal 9 with Composer on Pantheon.",
+  "type": "project",
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "path",
+      "url": "upstream-configuration"
+    }
+  ],
+  "require": {
+    "composer/installers": "^1.9",
+    "cweagans/composer-patches": "^1.7",
+    "drupal/admin_toolbar": "^3.0",
+    "drupal/core-composer-scaffold": "^9.2",
+    "drupal/core-recommended": "^9.2",
+    "drupal/pantheon_advanced_page_cache": "^1.2",
+    "drupal/restui": "^1.20",
+    "drush/drush": "^10",
+    "pantheon-systems/drupal-integrations": "^9",
+    "pantheon-upstreams/upstream-configuration": "self.version"
+  },
+  "require-dev": {
+    "drupal/core-dev": "^9.2"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "extra": {
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "./web"
+      },
+      "allowed-packages": [
+        "pantheon-systems/drupal-integrations"
+      ],
+      "file-mapping": {
+        "[project-root]/.editorconfig": false,
+        "[project-root]/pantheon.upstream.yml": false,
+        "[project-root]/.gitattributes": false
+      }
+    },
+    "installer-paths": {
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/Commands/contrib/{$name}": [
+        "type:drupal-drush"
+      ],
+      "web/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
+      "web/profiles/custom/{$name}": [
+        "type:drupal-custom-profile"
+      ],
+      "web/themes/custom/{$name}": [
+        "type:drupal-custom-theme"
+      ],
+      "web/private/scripts/quicksilver/{$name}/": [
+        "type:quicksilver-script"
+      ]
+    },
+    "enable-patching": true,
+    "composer-exit-on-patch-failure": true,
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "patches": {
+      "drupal/core": {
+        "3004421 - Add logout_token path": "https://www.drupal.org/files/issues/2021-01-29/3004421-13.patch"
+      }
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "platform": {
+      "php": "7.4"
+    }
+  }
+}
