@@ -1,11 +1,10 @@
 # Monan Live!
 
-**Monan Live!** is a motion detector and image upload project. Using a Raspberry Pi Zero, we detect motion, take a picture, and upload it to a Drupal 9 website. 
+**Monan Live!** is a motion detector and image upload project. Using a Raspberry Pi Zero, we detect motion, take a picture, and upload it to a Drupal 9 website.
 
-
+```markdown
 ![Monan Live Fritzing Diagram](python-app/Monan_Live_bb.jpg)
-
-
+```
 
 ## Part List
 
@@ -22,8 +21,6 @@ Below is a list of everything needed for the technical build.
 - [MT3608 DC-DC Boost Converter 2A](https://amzn.to/3E4BHb4)
 - [Micro USB Extension Cable](https://amzn.to/3sb6dOk)
 
-
-
 ### Optional Tools / Parts
 
 If you don't have some extra material, or want some additional adapters / connectors, you can add some of these to your toolset.
@@ -35,3 +32,14 @@ If you don't have some extra material, or want some additional adapters / connec
 - [Micro Connector Pin Crimping Tool](https://amzn.to/32bbnyJ)
 - [Assortment Resistor Kit](https://amzn.to/32bbHxr)
 
+## Hardware Installation
+
+### 1. Setup Headless Raspberry Pi
+
+- Configure boot
+  - Use config.txt
+  - Add wpa_supplicant.conf
+
+### 2. Add components
+
+(more info)
