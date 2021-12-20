@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "4e475364b1df1bf669529fff8591a6a9",
+=======
+    "content-hash": "eeb8012227783724fea3ab3375b720b0",
+>>>>>>> 9b55eb843c3ad024ab680aa32b1207bb5000c63a
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1756,6 +1760,7 @@
             "time": "2021-11-24T14:27:27+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "drupal/ctools",
             "version": "3.7.0",
             "source": {
@@ -1849,6 +1854,8 @@
             }
         },
         {
+=======
+>>>>>>> 9b55eb843c3ad024ab680aa32b1207bb5000c63a
             "name": "drupal/pantheon_advanced_page_cache",
             "version": "1.2.0",
             "source": {
@@ -1930,6 +1937,7 @@
             }
         },
         {
+<<<<<<< HEAD
             "name": "drupal/pathauto",
             "version": "1.8.0",
             "source": {
@@ -1998,6 +2006,8 @@
             }
         },
         {
+=======
+>>>>>>> 9b55eb843c3ad024ab680aa32b1207bb5000c63a
             "name": "drupal/restui",
             "version": "1.20.0",
             "source": {
@@ -2054,6 +2064,7 @@
             }
         },
         {
+<<<<<<< HEAD
             "name": "drupal/token",
             "version": "1.10.0",
             "source": {
@@ -2123,6 +2134,8 @@
             }
         },
         {
+=======
+>>>>>>> 9b55eb843c3ad024ab680aa32b1207bb5000c63a
             "name": "drush/drush",
             "version": "10.6.1",
             "source": {
@@ -3319,7 +3332,11 @@
         },
         {
             "name": "pantheon-upstreams/upstream-configuration",
+<<<<<<< HEAD
             "version": "dev-main",
+=======
+            "version": "dev-master",
+>>>>>>> 9b55eb843c3ad024ab680aa32b1207bb5000c63a
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
