@@ -20,10 +20,7 @@
     "drupal/core-composer-scaffold": "^9.2",
     "drupal/core-recommended": "^9.2",
     "drupal/pantheon_advanced_page_cache": "^1.2",
-<<<<<<< HEAD
     "drupal/pathauto": "^1.8",
-=======
->>>>>>> 9b55eb843c3ad024ab680aa32b1207bb5000c63a
     "drupal/restui": "^1.20",
     "drush/drush": "^10",
     "pantheon-systems/drupal-integrations": "^9",
